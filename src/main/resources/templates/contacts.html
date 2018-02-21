@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/custom.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
+            crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<h3>My Contacts</h3>
+<hr/>
+<div class="form">
+    <h5>Add a new Contact</h5>
+    <form action="/save" method="POST" id="contactForm">
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                <label for="name">Full Name</label>
+                <input type="text" name="name" required="required" class="form-control" id="name" maxlength="100">
+            </div>
+            <div class="col-xs-6 form-group">
+                <label for="phone">Phone <i>(format: xxxx-xxx-xxxx)</i></label>
+                <input type="text" name="phone" required="required" class="form-control" id="phone" maxlength="20"
+                       pattern="^\d{4}-\d{3}-\d{4}$">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+
+<div class="list">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">#</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#contactList}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{phone}}</td>
+            <td>
+                <form action="/delete/{{id}}" method="GET">
+                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/contactList}}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
